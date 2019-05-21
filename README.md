@@ -33,10 +33,10 @@ With `dialog`, we perform `dialog:user-one-of "What's your favorite fruit?" ["ap
 
 | Prim Name         | Arguments                      | Behavior
 | ----------------- | ------------------------------ | --------
-| `user-input`      | `message` `callback`           | [See `import-input`](https://ccl.northwestern.edu/netlogo/docs/dictionary.html#user-input)
-| `user-message`    | `message` `callback`           | [See `import-message`](https://ccl.northwestern.edu/netlogo/docs/dictionary.html#user-message)
-| `user-one-of`     | `message` `options` `callback` | [See `import-one-of`](https://ccl.northwestern.edu/netlogo/docs/dictionary.html#user-one-of)
-| `user-yes-or-no?` | `message` `callback`           | [See `import-yes-or-no?`](https://ccl.northwestern.edu/netlogo/docs/dictionary.html#user-yes-or-no)
+| `user-input`      | `message` `callback`           | [See `user-input`](https://ccl.northwestern.edu/netlogo/docs/dictionary.html#user-input)
+| `user-message`    | `message` `callback`           | [See `user-message`](https://ccl.northwestern.edu/netlogo/docs/dictionary.html#user-message)
+| `user-one-of`     | `message` `options` `callback` | [See `user-one-of`](https://ccl.northwestern.edu/netlogo/docs/dictionary.html#user-one-of)
+| `user-yes-or-no?` | `message` `callback`           | [See `user-yes-or-no?`](https://ccl.northwestern.edu/netlogo/docs/dictionary.html#user-yes-or-no)
 
 ## Building
 
