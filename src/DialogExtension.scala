@@ -22,7 +22,13 @@ class DialogExtension extends DefaultClassManager {
   private var noDialogIsOpen = true
 
   private object UserInput extends Command {
-    override def getSyntax = Syntax.commandSyntax(right = List(Syntax.StringType, Syntax.CommandType))
+
+    override def getSyntax =
+      Syntax.commandSyntax(
+        right         = List(Syntax.StringType, Syntax.CommandType)
+      , defaultOption = Some(2)
+      )
+
     override def perform(args: Array[Argument], context: Context): Unit = {
 
       if (noDialogIsOpen && !context.workspace.isHeadless) {
@@ -62,7 +68,13 @@ class DialogExtension extends DefaultClassManager {
   }
 
   private object UserMessage extends Command {
-    override def getSyntax = Syntax.commandSyntax(right = List(Syntax.StringType, Syntax.CommandType))
+
+    override def getSyntax =
+      Syntax.commandSyntax(
+        right         = List(Syntax.StringType, Syntax.CommandType)
+      , defaultOption = Some(2)
+      )
+
     override def perform(args: Array[Argument], context: Context): Unit = {
 
       if (noDialogIsOpen && !context.workspace.isHeadless) {
@@ -105,7 +117,13 @@ class DialogExtension extends DefaultClassManager {
   }
 
   private object UserOneOf extends Command {
-    override def getSyntax = Syntax.commandSyntax(right = List(Syntax.StringType, Syntax.ListType, Syntax.CommandType))
+
+    override def getSyntax =
+      Syntax.commandSyntax(
+        right         = List(Syntax.StringType, Syntax.ListType, Syntax.CommandType)
+      , defaultOption = Some(3)
+      )
+
     override def perform(args: Array[Argument], context: Context): Unit = {
 
       if (noDialogIsOpen && !context.workspace.isHeadless) {
@@ -156,7 +174,13 @@ class DialogExtension extends DefaultClassManager {
   }
 
   private object UserYesOrNo extends Command {
-    override def getSyntax = Syntax.commandSyntax(right = List(Syntax.StringType, Syntax.CommandType))
+
+    override def getSyntax =
+      Syntax.commandSyntax(
+        right         = List(Syntax.StringType, Syntax.CommandType)
+      , defaultOption = Some(2)
+      )
+
     override def perform(args: Array[Argument], context: Context): Unit = {
 
       if (noDialogIsOpen && !context.workspace.isHeadless) {
