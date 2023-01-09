@@ -38,19 +38,21 @@ class DialogExtension extends DefaultClassManager {
             val message    = args(0).getString
             val onComplete = args(1).getCommand
 
+            var result: AnyRef = null
+
             val f = {
               () =>
 
                 gw.view.mouseDown(false)
 
                 noDialogIsOpen = false
-                val result = new InputDialog(gw.getFrame, "User Input", message, I18N.gui.fn).showInputDialog()
-                noDialogIsOpen = true
 
-                if (result != null)
-                  onComplete.perform(context, Array(result))
-                else
-                  throw new HaltException(true)
+                result =
+                  new InputDialog( gw.getFrame, "User Input", message
+                                 , I18N.gui.fn
+                                 ).showInputDialog()
+
+                noDialogIsOpen = true
 
             }
 
@@ -58,8 +60,13 @@ class DialogExtension extends DefaultClassManager {
               f()
             else {
               gw.updateUI()
-              EventQueue.invokeLater { () => f() }
+              EventQueue.invokeAndWait { () => f() }
             }
+
+            if (result != null)
+              onComplete.perform(context, Array(result))
+            else
+              throw new HaltException(true)
 
         }
       }
@@ -84,6 +91,8 @@ class DialogExtension extends DefaultClassManager {
             val message    = args(0).getString
             val onComplete = args(1).getCommand
 
+            var result: Int = -1
+
             val f = {
               () =>
 
@@ -93,13 +102,12 @@ class DialogExtension extends DefaultClassManager {
                 val haltStr = I18N.gui.get("common.buttons.halt")
 
                 noDialogIsOpen = false
-                val result = OptionDialog.showMessage(gw.getFrame, "User Message", message, Array(okStr, haltStr))
-                noDialogIsOpen = true
 
-                if (result != 1)
-                  onComplete.perform(context, Array())
-                else
-                  throw new HaltException(true)
+                result =
+                  OptionDialog.showMessage(gw.getFrame, "User Message", message
+                                          , Array(okStr, haltStr))
+
+                noDialogIsOpen = true
 
             }
 
@@ -107,8 +115,13 @@ class DialogExtension extends DefaultClassManager {
               f()
             else {
               gw.updateUI()
-              EventQueue.invokeLater { () => f() }
+              EventQueue.invokeAndWait { () => f() }
             }
+
+            if (result != 1)
+              onComplete.perform(context, Array())
+            else
+              throw new HaltException(true)
 
         }
       }
@@ -139,23 +152,21 @@ class DialogExtension extends DefaultClassManager {
 
             val choices = items.map(Dump.logoObject).toArray[AnyRef]
 
+            var result: AnyRef = null
+
             val f = {
               () =>
 
                 gw.view.mouseDown(false)
 
                 noDialogIsOpen = false
-                val result =
-                  new OptionDialog(gw.getFrame, "User One Of", message, choices, I18N.gui.fn).showOptionDialog()
-                noDialogIsOpen = true
 
-                if (result != null) {
-                  val index      = result.asInstanceOf[JInteger].intValue
-                  val resultItem = items(index)
-                  onComplete.perform(context, Array(resultItem))
-                } else {
-                  throw new HaltException(true)
-                }
+                result =
+                  new OptionDialog(gw.getFrame, "User One Of", message, choices
+                                  , I18N.gui.fn
+                                  ).showOptionDialog()
+
+                noDialogIsOpen = true
 
             }
 
@@ -163,7 +174,15 @@ class DialogExtension extends DefaultClassManager {
               f()
             else {
               gw.updateUI()
-              EventQueue.invokeLater { () => f() }
+              EventQueue.invokeAndWait { () => f() }
+            }
+
+            if (result != null) {
+              val index      = result.asInstanceOf[JInteger].intValue
+              val resultItem = items(index)
+              onComplete.perform(context, Array(resultItem))
+            } else {
+              throw new HaltException(true)
             }
 
         }
@@ -190,6 +209,8 @@ class DialogExtension extends DefaultClassManager {
             val message    = args(0).getString
             val onComplete = args(1).getCommand
 
+            var result: Int = -1
+
             val f = {
               () =>
 
@@ -200,22 +221,10 @@ class DialogExtension extends DefaultClassManager {
                 val haltStr = I18N.gui.get("common.buttons.halt")
 
                 noDialogIsOpen = false
-                val result =
+                result =
                   OptionDialog.showIgnoringCloseBox( gw.getFrame, "User Yes or No", message
                                                    , Array(yesStr, noStr, haltStr), false)
                 noDialogIsOpen = true
-
-                val resultBool =
-                  result match {
-                    case 0 => JBoolean.TRUE
-                    case 1 => JBoolean.FALSE
-                    case _ => null
-                  }
-
-                if (resultBool != null)
-                  onComplete.perform(context, Array(resultBool))
-                else
-                  throw new HaltException(true)
 
             }
 
@@ -223,8 +232,20 @@ class DialogExtension extends DefaultClassManager {
               f()
             else {
               gw.updateUI()
-              EventQueue.invokeLater { () => f() }
+              EventQueue.invokeAndWait { () => f() }
             }
+
+            val resultBool =
+              result match {
+                case 0 => JBoolean.TRUE
+                case 1 => JBoolean.FALSE
+                case _ => null
+              }
+
+            if (resultBool != null)
+              onComplete.perform(context, Array(resultBool))
+            else
+              throw new HaltException(true)
 
         }
       }
