@@ -1,4 +1,3 @@
-//
 enablePlugins(org.nlogo.build.NetLogoExtension)
 
 netLogoExtName := "dialog"
