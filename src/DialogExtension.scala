@@ -25,7 +25,7 @@ class DialogExtension extends DefaultClassManager {
 
     override def getSyntax =
       Syntax.commandSyntax(
-        right         = List(Syntax.StringType, Syntax.CommandType)
+        right         = List(Syntax.StringType, Syntax.StringType | Syntax.RepeatableType, Syntax.CommandType)
       , defaultOption = Some(2)
       )
 
@@ -36,7 +36,8 @@ class DialogExtension extends DefaultClassManager {
           case gw: GUIWorkspace =>
 
             val message    = args(0).getString
-            val onComplete = args(1).getCommand
+            val default    = if (args.length > 2) args(1).getString else ""
+            val onComplete = args(args.length - 1).getCommand
 
             var result: AnyRef = null
 
@@ -49,7 +50,7 @@ class DialogExtension extends DefaultClassManager {
 
                 result =
                   new InputDialog( gw.getFrame, "User Input", message
-                                 , I18N.gui.fn
+                                 , I18N.gui.fn, default
                                  ).showInputDialog()
 
                 noDialogIsOpen = true
