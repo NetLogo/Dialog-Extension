@@ -1,4 +1,6 @@
+.bsp/
 target/
 
 /dialog.jar
 /.bundledFiles
+/*.zip
