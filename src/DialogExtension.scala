@@ -25,7 +25,7 @@ class DialogExtension extends DefaultClassManager {
 
     override def getSyntax =
       Syntax.commandSyntax(
-        right         = List(Syntax.StringType, Syntax.StringType | Syntax.RepeatableType, Syntax.CommandType)
+        right         = List(Syntax.StringType | Syntax.RepeatableType, Syntax.CommandType)
       , defaultOption = Some(2)
       )
 
