@@ -3,9 +3,9 @@ package org.nlogo.extension.dialog
 import java.awt.{ EventQueue => JEventQueue }
 import java.lang.{ Boolean => JBoolean, Integer => JInteger }
 
-import org.nlogo.api.{ Argument, Command, Context, DefaultClassManager, Dump, ExtensionException, PrimitiveManager, ReporterRunnable }
+import org.nlogo.api.{ Argument, Command, Context, DefaultClassManager, Dump, ExtensionException, PrimitiveManager }
 import org.nlogo.awt.EventQueue
-import org.nlogo.core.{ I18N, LogoList, Syntax }
+import org.nlogo.core.{ I18N, Syntax }
 import org.nlogo.nvm.HaltException
 import org.nlogo.swing.{ InputOptionPane, OptionPane }
 import org.nlogo.window.GUIWorkspace
@@ -31,7 +31,7 @@ class DialogExtension extends DefaultClassManager {
 
     override def perform(args: Array[Argument], context: Context): Unit = {
 
-      if (noDialogIsOpen && !context.workspace.isHeadless) {
+      if (noDialogIsOpen && context.workspace.workspaceContext.workspaceGUI) {
         context.workspace match {
           case gw: GUIWorkspace =>
 
@@ -77,7 +77,7 @@ class DialogExtension extends DefaultClassManager {
 
     override def perform(args: Array[Argument], context: Context): Unit = {
 
-      if (noDialogIsOpen && !context.workspace.isHeadless) {
+      if (noDialogIsOpen && context.workspace.workspaceContext.workspaceGUI) {
         context.workspace match {
           case gw: GUIWorkspace =>
 
@@ -131,7 +131,7 @@ class DialogExtension extends DefaultClassManager {
 
     override def perform(args: Array[Argument], context: Context): Unit = {
 
-      if (noDialogIsOpen && !context.workspace.isHeadless) {
+      if (noDialogIsOpen && context.workspace.workspaceContext.workspaceGUI) {
         context.workspace match {
           case gw: GUIWorkspace =>
 
@@ -192,7 +192,7 @@ class DialogExtension extends DefaultClassManager {
 
     override def perform(args: Array[Argument], context: Context): Unit = {
 
-      if (noDialogIsOpen && !context.workspace.isHeadless) {
+      if (noDialogIsOpen && context.workspace.workspaceContext.workspaceGUI) {
         context.workspace match {
           case gw: GUIWorkspace =>
 
