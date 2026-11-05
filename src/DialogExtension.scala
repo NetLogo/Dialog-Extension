@@ -97,7 +97,7 @@ class DialogExtension extends DefaultClassManager {
                 noDialogIsOpen = false
 
                 result = new OptionPane(gw.getFrame, "User Message", message, Seq(okStr, haltStr),
-                                        OptionPane.Icons.Info).getSelectedIndex
+                                        OptionPane.Icons.info).getSelectedIndex
 
                 noDialogIsOpen = true
 
@@ -153,7 +153,7 @@ class DialogExtension extends DefaultClassManager {
 
                 noDialogIsOpen = false
 
-                result = new OptionPane(gw.getFrame, "User One Of", message, choices, OptionPane.Icons.Question)
+                result = new OptionPane(gw.getFrame, "User One Of", message, choices, OptionPane.Icons.question)
                            .getSelectedIndex
 
                 noDialogIsOpen = true
@@ -213,7 +213,7 @@ class DialogExtension extends DefaultClassManager {
                 noDialogIsOpen = false
 
                 result = new OptionPane(gw.getFrame, "User Yes or No", message, Seq(yesStr, noStr, haltStr),
-                                        OptionPane.Icons.Question).getSelectedIndex
+                                        OptionPane.Icons.question).getSelectedIndex
 
                 noDialogIsOpen = true
 
